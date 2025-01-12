@@ -149,6 +149,91 @@ public class LinkedList {
             }
             prev.next =null;
         }
+        public Node getmid(Node head){
+            Node slow = head;
+            Node fast = head.next;
+
+            while(fast!=null && fast.next!=null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            return slow; // its the mid
+        }
+        public Node merge(Node head1, Node head2){
+            Node mergell  = new Node(-1);
+            Node temp = mergell;
+            while(head1!=null && head2!=null){
+                if(head1.data<=head2.data){
+                    temp.next = head1;
+                    head1 = head1.next;
+                    temp = temp.next;
+                } else{
+                    temp.next = head2;
+                    head2 = head2.next;
+                    temp = temp.next;
+                }
+            }
+            while(head1!=null){
+                temp.next = head1;
+                head1 = head1.next;
+                temp = temp.next;
+            }
+            while(head2!=null){
+                temp.next = head2;
+                head2 = head2.next;
+                temp = temp.next;
+            }
+            return mergell.next;
+        }
+
+        public Node mergesort(Node head){
+            if(head==null || head.next == null){
+                return head;
+            }
+            Node mid = getmid(head);
+            Node righthead = mid.next;
+            mid.next = null;
+            Node newleft = mergesort(head);
+            Node newright = mergesort(righthead);
+
+            return merge(newleft, newright);
+        }
+        public void zigzag(){
+            //find the mid
+            Node slow = head;
+            Node fast = head.next;
+            while(fast!=null && fast.next!=null){
+                slow = slow.next;
+                fast = fast.next.next;
+            }
+            Node mid = slow;
+            Node curr = mid.next;
+            mid.next = null;
+             //reverse the righthalf
+             Node prev = null;
+             Node next;
+             while(curr!=null){
+                next= curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+             }
+             //turn it into zigzag
+             Node left = head;
+             Node right = prev;
+             Node nextl, nextr;
+
+             while(left!=null && right!=null){
+                nextl = left.next;
+                left.next = right;
+                nextr = right.next;
+                right.next = nextl;
+
+                left = nextl;
+                right = nextr;
+
+             }
+        }
     
 
     public static void main(String[] args) {
@@ -162,16 +247,25 @@ public class LinkedList {
         // ll.printll();
         // ll.reverse();
         // ll.printll();
-        head = new Node(1);
-        Node temp  = new Node(2);
-        head.next = temp;
-        head.next.next = new Node(3);
-        head.next.next.next = temp;
-        System.out.println(isCycle());
-        removeCycle();
-        System.out.println(isCycle());
+        // head = new Node(1);
+        // Node temp  = new Node(2);
+        // head.next = temp;
+        // head.next.next = new Node(3);
+        // head.next.next.next = temp;
+        // System.out.println(isCycle());
+        // removeCycle();
+        // System.out.println(isCycle());
         
-
+        LinkedList ll = new LinkedList();
+        ll.addLast(1);
+        ll.addLast(2);
+        ll.addLast(3);
+        ll.addLast(4);
+        ll.addLast(5);
+        ll.printll();
+        // ll.head = ll.mergesort(ll.head);
+        ll.zigzag();
+        ll.printll();
 
     }
 }

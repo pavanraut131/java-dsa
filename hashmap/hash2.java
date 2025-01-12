@@ -2,6 +2,7 @@ package hashmap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Set;
 
 public class hash2 {
     public static void main(String[] args) {
@@ -9,7 +10,7 @@ public class hash2 {
         hm.put("Inida", 100);
         hm.put("Pakistan", 50);
 
-        ArrayList<String> keys = hm.keySet();
+        Set<String> keys = hm.keySet();
 
         for(String k:keys){
             System.out.println(k);

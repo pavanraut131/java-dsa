@@ -18,9 +18,13 @@ public class reversearray{
 
     public static void main(String[] args){
         int numbers[] = {10, 2, 4, 56, 9};
-        reverse(numbers);
+        // reverse(numbers);
 
-        for(int i=0; i < numbers.length; i++){
+        // for(int i=0; i < numbers.length; i++){
+        //     System.out.print(numbers[i] +" ");
+        // }
+
+        for(int i=numbers.length-1;i>=0;i--){
             System.out.print(numbers[i] +" ");
         }
     }
